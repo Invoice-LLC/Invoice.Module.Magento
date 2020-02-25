@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="content">
+        <block class="Magento\InvoicePayment\Block\Index" name="invoice_checkout_index" template="Magento_InvoicePayment::index.phtml" />
+    </referenceContainer>
+</page>
