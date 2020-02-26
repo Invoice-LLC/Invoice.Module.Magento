@@ -172,4 +172,9 @@ class Index extends \Magento\Framework\App\Action\Action
         return $this->scopeConfig->getValue("$path$key", "websites");
     }
 
+    private function log($log) {
+        $fp = fopen('invoice_payment.log', 'a+');
+        fwrite($fp, $log);
+        fclose($fp);
+    }
 }

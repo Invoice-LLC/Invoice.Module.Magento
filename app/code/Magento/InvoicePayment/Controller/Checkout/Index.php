@@ -166,7 +166,7 @@ class Index extends \Magento\Framework\App\Action\Action
         }
         $create_payment->receipt = $receipt;
         $payment = $this->client->CreatePayment($create_payment);
-        print_r($payment);
+        $this->log("PAYMENT ".json_encode($payment) . "\n");
         return @$payment->payment_url;
     }
 
@@ -177,9 +177,10 @@ class Index extends \Magento\Framework\App\Action\Action
 
         $terminal = $this->client->CreateTerminal($create_terminal);
         if($terminal == null or @$terminal->error != null) {
+            $this->log("ERROR ".json_encode($terminal) . "\n");
             return null;
         }
-
+        $this->log("TERMINAL ".json_encode($terminal) . "\n");
         $this->setConfig("terminal", $terminal->id);
         return $terminal->id;
     }
@@ -209,5 +210,11 @@ class Index extends \Magento\Framework\App\Action\Action
         $this->cacheTypeList->cleanType(\Magento\Framework\App\Cache\Type\Config::TYPE_IDENTIFIER);
         $this->cacheTypeList->cleanType(\Magento\PageCache\Model\Cache\Type::TYPE_IDENTIFIER);
         return $this->scopeConfig->getValue("$path$key", "websites");
+    }
+
+    private function log($log) {
+        $fp = fopen('invoice_payment.log', 'a+');
+        fwrite($fp, $log);
+        fclose($fp);
     }
 }

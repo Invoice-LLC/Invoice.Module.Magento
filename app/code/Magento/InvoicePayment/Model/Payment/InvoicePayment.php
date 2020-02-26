@@ -47,8 +47,4 @@ class InvoicePayment extends \Magento\Payment\Model\Method\AbstractMethod
 
         return $terminal;
     }
-
-    private function createPayment() {
-
-    }
 }
